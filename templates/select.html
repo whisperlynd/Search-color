@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>中传要闻</title>
+</head>
+<body>
+<!--
+{% for d in data:%}
+{{d.loop}}<a href="{{d[1]}}">{{d[2]}}</a><br>
+{%   endfor
+%}
+-->
+
+	{%extends "base.html" %}
+	{%block title%}中传要闻{% endblock %}
+	{% block page_content %}
+	<div class="page-header">
+		<h1>中传要闻的新闻总数：{{count}}</h1>
+		{% for r in rs %}
+		<a href="/name/cucnews3/{{r[0]}}"  target="_blank">{{ r[2]}}</a><br>
+		{%   endfor
+		%}
+	</div>
+	
+	<div class="page-content">
+		<div>
+		</div>
+	</div>
+	
+	{% endblock %}
+
+</body>
+</html>

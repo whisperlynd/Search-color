@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="referrer" content="no-referrer" />
+	<meta name=”viewport” content="width=device-width, initial-scale=1" />
+    <title>豆瓣读书排名250</title>
+	<style>
+	table {margin-left: 10%}
+	div.page-header{
+	margin-bottom:0;
+	padding-bottom:0;
+	}
+	</style>
+</head>
+<body>
+<!--
+{% for d in data:%}
+{{d.loop}}<a href="{{d[1]}}">{{d[2]}}</a><br>
+{%   endfor
+%}
+-->
+
+	{%extends "base.html" %}
+	{%block title%}豆瓣读书排名250{% endblock %}
+	{% block page_content %}
+	<div class="page-header"  id="start">
+		<br><br>
+		 <table width="90%">
+		<tr class="item">
+		  <td width="100" valign="top"></td>
+		  <td valign="top">
+		<p  style="font-size:20px;">搜索：{{wanted}}</p>
+
+		<p  style="font-size:10px;">总共{{count}}条结果</p>
+		</td>
+		</tr>
+		</table>
+		{% for r in rs %}
+		
+	  <table width="90%">
+		<tr class="item">
+		  <td width="100" valign="top">
+			  <img referrer="no-referrer|origin|unsafe-url" src="{{r[5]}}" width="90" />
+		  </td>
+		  <td valign="top">
+		<div class="pl2">
+			<a href="/name/book_detail1/detail/{{r[8]+1000}}" onclick=&#34;moreurl(this,{i:&#39;0&#39;})&#34; title="{{r[0]}}">{{r[0]}}</a>&nbsp; 
+			<img src="{{r[4]}}" alt="" title=""/>
+			<br/>
+				<span style="font-size:12px;">{{r[1]}}</span>
+			</div>
+			  <p class="pl">{{r[2]}}</p>
+			  <div class="star clearfix">
+				  <span class="allstar45"></span>
+				  <span class="rating_nums">{{r[3]}}</span>
+			  </div>
+			  <p class="quote" style="margin: 10px 0; color: #666">
+				  <span class="inq">{{r[7]}}</span>
+			  </p>
+		  </td>
+		</tr>
+	  </table>
+		<p class="ul"></p>
+		<br>
+		<br>
+		{%   endfor
+		%}
+		<div class="page-content" id="start">
+			<div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	{% endblock %}
+
+</body>
+</html>

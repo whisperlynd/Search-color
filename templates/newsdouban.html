@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="referrer" content="no-referrer" />
+	<meta name=”viewport” content=”width=device-width, initial-scale=1″ />
+    <title>{{rs[0][0]}}</title>
+</head>
+<style>
+     pre{
+white-space: pre-wrap;       
+white-space: -moz-pre-wrap;  
+white-space: -pre-wrap;      
+white-space: -o-pre-wrap;    
+word-wrap: break-word;  
+}   
+table{
+}
+div.page-content{
+margin-left:8%;
+margin-right:8%;
+}
+div.pl2{
+margin-left:1%;
+padding-top:26px;
+}
+p.pl{
+margin:0 auto
+
+}
+.div-relative{position:relative;border:0px solid #000;width:100%} 
+.div-a{ position:absolute;left:100px;top:30px;z-index:100;width:200px} 
+/* div背景色为红色 */ 
+
+	.stars-bg{
+    position: relative;
+    display: inline-block;
+    height: 25px;
+    width: 150px;
+    background: url({{url_for('static', filename='s2.png') }}) 0 0;
+}
+.star-active{
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    height: 100%;
+    background: url({{url_for('static', filename='s2.png') }}) 0 -30px;
+}
+    </style>
+
+	
+<body>
+	{%extends "base.html" %}
+	{%block title%}{{rs[0][0]}}{% endblock %}
+	{% block page_content %}
+	<div class="page-header"   id="start">
+		<br>	
+		<br>
+	    <table width="90%" class="div-relative" height="250">
+			<tr class="item">
+				<td width="100"></td>
+				<td  class="div-a" width="200" valign="top">
+					<img referrer="no-referrer|origin|unsafe-url" src="{{rs[0][16]}}" width="190" />
+				</td>
+				<td   width="220" valign="top">
+				</td>
+				<td  width="330" valign="top">
+					<div class="pl2">
+					<p class="pl" style="font-size:20px;">{{rs[0][0]}}</p>
+					<p class="pl" style="font-size:12px;">{{rs[0][4]}}</p>
+					<p class="pl" style="font-size:12px;">{{rs[0][1]}}</p>
+						<br>
+					  <p class="pl" style="font-size:10px;">{{rs[0][2]}}</p>
+					  <p class="pl" style="font-size:10px;">{{rs[0][3]}}</p>
+					  <p class="pl" style="font-size:10px;">{{rs[0][5]}}</p>
+					  <br>
+					  <br>
+					  <p class="pl" style="font-size:15px;">" {{rs[0][17]}} "</p>
+					  <!--
+					  <p class="pl" style="font-size:12px;">{{rs[0][7]}}</p>
+					  <p class="pl" style="font-size:12px;">{{rs[0][8]}}</p>
+					  <p class="pl" style="font-size:12px;">{{rs[0][9]}}</p>
+					  <p class="pl" style="font-size:12px;">{{rs[0][10]}}</p>
+					  -->
+					  </div>
+				</td>
+				<td valign="bottom">
+					<div class="star-eval">
+						<span class="stars-bg">
+							<!-- 宽度由实际数据自行计算 如% -->
+							<i class="star-active" style="width: {{rs[0][12]*10}}%"></i>
+						</span>
+						&nbsp
+						<span class="right-txt" style="font-size:10px;">{{rs[0][12]}} 分</span>
+					</div>
+					  <p class="pl" style="font-size:15px;"></p>
+					  <p class="pl" style="font-size:12px;"></p>
+					  <br>
+					  <br>
+				</td>
+			</tr>
+	    </table>
+		<p class="ul"></p>
+	</div>
+	<br><br><br>
+	
+	<div class="page-content">
+	  <p class="pl" style="font-size:15px;">
+    <span class=""><strong><font color="	#FF69B4">内容简介</span>
+      &nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;
+
+  </p></strong><table height="10" width="90%"></table>
+  <font color="	#000000">
+			<p class="pl" style="font-size:12px;">{{rs[0][13]}}</p>
+			<br>
+			 <p class="pl" style="font-size:15px;">
+    <span class=""><strong><font color="	#FF69B4">作者简介</span>
+      &nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;
+</strong>
+  </p>
+  <table height="10" width="90%"></table>
+  <font color="	#000000">
+			<p class="pl" style="font-size:12px;">{{rs[0][14]}}</p>
+			
+	</div>
+	<br><br>
+	{% endblock %}
+	
+</body>
+</html>

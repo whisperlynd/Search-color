@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图像处理</title>
+    <link href="{{ url_for('static', filename='css/buttons.css') }}" rel="stylesheet" type="text/css" media="all"/>
+
+</head>
+<body>
+    <form action="" enctype='multipart/form-data' method='POST'>
+        <input type="file" name="file" style="margin-top:20px;"/>
+        <br>
+        <p style="font-size:18px;margin:0 auto;">想实现的图片效果：</p>
+        <table>
+            <tr>
+                <td>
+                    <input type="text" width ="200px "class="txt_input form-control input-lg" name="name"  value="灰度" style="margin-top:10px;"/>
+                </td>
+                <td>
+                    <input type="submit" value="上传" class="button" style="margin-top:10px;margin-left:10px;"/>
+                </td>
+            </tr>
+        </table>
+
+
+    </form>
+    <table>
+        <tr>
+            <td>
+                <div style="width:450px;">
+                    <h1>原图</h1>
+                    <img src="{{ url_for('static', filename= './images/test.jpg',_t=val1) }}" width="400"  alt="你的图片被外星人劫持了～～"/>
+                </div>
+            </td>
+            <td>
+                <div style="width:450px;">
+                    <h1>{{userinput}}效果图</h1>
+                    <img src="{{ url_for('static', filename= './images/test1.jpg',_t=val1) }}" width="400"alt="你的图片被外星人劫持了～～"/>
+                </div>
+            </td>
+            <td><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                <button class ="button" type="button" name="下载" onclick="location.href='{{ url_for('download', filename='test1.jpg')}}'">下载效果图</button></td>
+        
+        </tr>
+        <!--<tr>
+            <td width="450px"></td>
+            <td width="450px"></td>
+            <td align="left"><button class ="button" type="button" name="下载" onclick="location.href='{{ url_for('download', filename='test1.jpg')}}'">下载效果图</button></td>
+        </tr>-->
+    </table>
+
+
+</body>
+</html>
+

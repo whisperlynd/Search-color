@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图像处理</title>
+    <link href="{{ url_for('static', filename='css/buttons.css') }}" rel="stylesheet" type="text/css" media="all"/>
+</head>
+<body>
+    <form action="" enctype='multipart/form-data' method='POST'>
+        <input type="file" name="file" style="margin-top:20px;"/>
+        <br>
+        <p style="font-size:18px;margin:0 auto;">想实现的图片效果：</p>
+        <table>
+            <tr>
+                <td>
+                    <input type="text" width ="200px "class="txt_input form-control input-lg" name="name"  value="灰度" style="margin-top:10px;"/>
+                </td>
+                <td>
+                    <input type="submit" value="上传" class="button" style="margin-top:10px;margin-left:10px;"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+

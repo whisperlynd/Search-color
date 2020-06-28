@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="referrer" content="no-referrer" />
+	<meta name=”viewport” content="width=device-width, initial-scale=1" />
+    <title>猫眼专业版实时票房</title>
+	<style>
+	table {margin-left: 10%}
+	div.page-header{
+	margin-bottom:0;
+	padding-bottom:0;
+	}
+	.tit{text-align:center}
+	.divsvg{
+	margin-left:50px;
+	margin-right:50px;
+	border:1px solid;
+	 border-color:#EEE8AA;
+	background-color:#FFFFF0;
+	} 
+	</style>
+</head>
+<body>
+
+	{%extends "base_piaofang.html" %}
+	{%block title%}猫眼专业版实时票房{% endblock %}
+	{% block page_content %}
+	<div class="page-header"  id="start" width="100%">
+		<br>
+		<p  class="tit"style="font-size:25px;">猫眼电影实时票房</p>
+		<p  class="tit"style="font-size:15px;">刷新时间：{{ moment(current_time).format('LLL') }}</p>
+		<hr /><font color="#808080">
+		<p  class="tit"style="font-size:15px;">总票房直方图</p>
+		</font>
+		<div id="mySVG" class="divsvg">
+		</div>
+		
+		<hr /><font color="#808080">
+		<p  class="tit"style="font-size:15px;">今日票房直方图</p>
+		</font>
+		<div id="mySVG1"  class="divsvg">
+		</div>
+		
+		<hr /><font color="#808080">
+		<p  class="tit"style="font-size:15px;">今日票房占比饼图</p>
+		</font>
+		<div id="mySVG2"  class="divsvg">
+		</div>
+		<div class="page-content" id="start">
+		</div>
+	</div>
+
+	
+	{% endblock %}
+	{% block scripts %}
+	{{ super() }}
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+		<script type="text/javascript">	
+		var width=(0.98)*(window.innerWidth
+|| document.documentElement.clientWidth
+|| document.body.clientWidth)-100;
+
+var height=20*30;
+var cellh=height/({{n}}+1)
+  // 添加SVG画布
+            var dataset =  {{sum}};
+            var svg=d3.select("#mySVG")
+						.append("svg").attr('width', width)
+                        .attr('height', height);
+            var padding = {top: 20, right: 20, bottom: 20, left: 30};
+			var color=d3.scale.category20();
+var linear = d3.scale.linear()
+        .domain([0, d3.max(dataset)])
+        .range([ 0,width-200]);
+            // 添加矩形和文字元素
+            var rect = svg.selectAll("rect")
+                            .data(dataset)
+                            .enter()  //获取enter部分
+                            .append("rect") //添加rect元素，使其与绑定数组的长度一致
+                            .attr("fill",function(d,i){return color(i);})
+							.attr("x",function(d,i){    //设置Y坐标
+                                return padding.left+100;
+                                // return height - padding.bottom - yScale(d);
+                            })
+                            .attr("y",function(d,i){    //设置X坐标
+                                return padding.top + i * cellh;
+                                // return padding.left + xScale(i);
+
+                            })
+                            
+                            .attr("height",24)    //设置矩形宽度
+                            .attr("width",function(d){
+                                return linear(d);
+                            })
+            var text = svg.selectAll(".num")
+                            .data(dataset)
+                            .enter()
+                            .append("text")
+                            .attr("fill",function(d,i){return color(i);})
+                            .attr("font-size","10px")
+                            .attr("text-anchor","middle")
+                            .attr("x",function(d,i){    //设置X坐标
+                                return padding.left+120+linear(d);
+                                // return padding.left + xScale(i);
+
+                            })
+                            .attr("y",function(d,i){    //设置Y坐标
+                                return padding.top + i * cellh+14;
+                            })
+							.attr("text-anchor","middle")
+                            .text(function(d){  //要显示的文字内容
+                                return d+"万";
+                            });
+							
+			var text = svg.selectAll(".name")
+                            .data({{movie|tojson}})
+                            .enter()
+                            .append("text")
+                            .attr("fill","black")
+                            .attr("font-size","12px")
+                            .attr("text-anchor","end")
+                            .attr("y",function(d,i){    //设置X坐标
+                                return padding.top + i * cellh+14;
+
+                            })
+                            .attr("x",function(d,i){    //设置Y坐标
+                                return padding.left+90;
+                                // return height - padding.bottom - yScale(d);
+                            })
+                            .text(function(d){  //要显示的文字内容
+                                return d;
+                            });
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+            var dataset =  {{box}};
+			
+var linear = d3.scale.linear()
+        .domain([0, d3.max(dataset)])
+        .range([ 0,width-200]);
+            var svg=d3.select("#mySVG1")
+						.append("svg").attr('width', width)
+                        .attr('height', height);
+            var padding = {top: 20, right: 20, bottom: 20, left: 30};
+			var color=d3.scale.category20();
+
+            // 添加矩形和文字元素
+            var rect = svg.selectAll("rect")
+                            .data(dataset)
+                            .enter()  //获取enter部分
+                            .append("rect") //添加rect元素，使其与绑定数组的长度一致
+                            .attr("fill",function(d,i){return color(i);})
+							.attr("x",function(d,i){    //设置Y坐标
+                                return padding.left+100;
+                                // return height - padding.bottom - yScale(d);
+                            })
+                            .attr("y",function(d,i){    //设置X坐标
+                                return padding.top + i * cellh;
+                                // return padding.left + xScale(i);
+
+                            })
+                            
+                            .attr("height",24)    //设置矩形宽度
+                            .attr("width",function(d){
+                                return (linear(d));
+                            })
+            var text = svg.selectAll(".num")
+                            .data(dataset)
+                            .enter()
+                            .append("text")
+                            .attr("fill",function(d,i){return color(i);})
+                            .attr("font-size","10px")
+                            .attr("text-anchor","middle")
+                            .attr("x",function(d,i){    //设置X坐标
+                                return padding.left+120+linear(d);
+                                // return padding.left + xScale(i);
+
+                            })
+                            .attr("y",function(d,i){    //设置Y坐标
+                                return padding.top + i * cellh+14;
+                            })
+							.attr("text-anchor","middle")
+                            .text(function(d){  //要显示的文字内容
+                                return d+"万";
+                            });
+							
+			var text = svg.selectAll(".name")
+                            .data({{movie|tojson}})
+                            .enter()
+                            .append("text")
+                            .attr("fill","black")
+                            .attr("font-size","12px")
+                            .attr("text-anchor","end")
+                            .attr("y",function(d,i){    //设置X坐标
+                                return padding.top + i * cellh+14;
+
+                            })
+                            .attr("x",function(d,i){    //设置Y坐标
+                                return padding.left+90;
+                                // return height - padding.bottom - yScale(d);
+                            })
+                            .text(function(d){  //要显示的文字内容
+                                return d;
+                            });
+							
+							
+							
+							
+							
+							
+							
+							
+							
+			
+
+
+
+
+			
+							
+							
+							
+							
+							
+		height=height-200					
+var dataset={{boxRate|tojson}};//设置数据集
+
+            var svg=d3.select("#mySVG2")
+						.append("svg").attr('width', width)
+                        .attr('height', height);
+ 
+var pie=d3.layout.pie();
+
+var piedata=pie(dataset);
+ 
+var outerRadius=150;//外半径
+var innerRadius=0;//内半径，为0则中间没用空白
+ 
+var arc=d3.svg.arc()//弧生成器
+.innerRadius(innerRadius)//设置内半径
+.outerRadius(outerRadius);//设置外半径
+var color=d3.scale.category10();
+var arcs=svg.selectAll(".g")
+.data(piedata)
+.enter()
+.append("g")
+.attr("transform","translate("+(width/2)+","+(height/2)+")");
+arcs.append("path")
+.attr("fill",function(d,i){
+    return color(i);
+})
+.attr("d",function (d) {
+    return arc(d);
+});
+arcs.append("text")
+.attr("transform",function(d){
+    return "translate("+arc.centroid(d)+")";
+})
+.attr("text-anchor","middle")
+.text(function(d){
+    return d.data+'%';
+});
+arcs.append("line")
+	.style("stroke","black")
+	.each(function(d){
+		d.textLine={x1:0,y1:0,x2:0,y2:0};
+	})
+	.attr("x1",function(d){
+		d.textLine.x1=arc.centroid(d)[0]*2.2;
+		return d.textLine.x1;
+	})
+	.attr("y1",function(d){
+		d.textLine.y1=arc.centroid(d)[1]*2.2;
+		return d.textLine.y1;
+	})
+	.attr("x2",function(d){
+		// console.log("d.data[0]:  "+d.data[0]);//产商名
+		var strLen=60;
+		var bx=arc.centroid(d)[0]*2.2;
+		d.textLine.x2=bx>=0?bx+strLen:bx-strLen;
+		return d.textLine.x2;
+	})
+	.attr("y2",function(d){
+		d.textLine.y2=arc.centroid(d)[1]*2.2;
+		return d.textLine.y2;
+	});
+arcs.append("line")
+				.attr("stroke","black")
+				.attr("x1",function(d){return arc.centroid(d)[0]*(2);})
+				.attr("y1",function(d){return arc.centroid(d)[1]*(2);})
+				.attr("x2",function(d){return arc.centroid(d)[0]*2.2;})
+				.attr("y2",function(d){return arc.centroid(d)[1]*2.2;});
+arcs.append("text")
+.attr("transform",function(d){
+    var x=0;
+    var y=0;
+    x=(d.textLine.x1+d.textLine.x2)/2;
+    y=d.textLine.y1;
+    y=y>0?y+14*1.1:y-14*0.4;
+    return "translate("+x+","+y+")";
+  })
+
+				/*return "translate(" + (x) + "," + (y )+ ")";
+				function (d) {
+         
+          
+        })
+		*/
+				.attr("text-anchor","middle")
+				.attr("font-size","12px")
+				.attr("fill","rgb(0,0,0)")
+				.text(function(d,i){return {{movie|tojson}}[i];});
+			//function(d){return d[0];}
+			//(function(d){return Math.floor((d.endAngle-d.startAngle)*180/Math.PI)+"°";}) 
+
+		</script>
+	{% endblock %}
+</body>
+</html>

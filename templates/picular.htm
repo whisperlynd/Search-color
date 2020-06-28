@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="referrer" content="no-referrer" />
+	<meta name=”viewport” content="width=device-width, initial-scale=1" />
+    <title>图像处理</title>
+</head>
+<body>
+	<table id="main_t" width="100%">
+	</table>
+	
+<script>
+	var w=window.innerWidth
+	|| document.documentElement.clientWidth
+	|| document.body.clientWidth;
+
+	var h=window.innerHeight
+	|| document.documentElement.clientHeight
+	|| document.body.clientHeight;
+
+	var table=document.getElementById("main_t");
+	table.setAttribute("width",w*0.98);
+	
+	function transparent(x)
+	{
+	x.style.opacity=0;
+	}
+
+	function normal(x)
+	{
+		x.style.opacity=1;
+	}
+	for (i = 0; i <{{size}}; i++) { 
+	var tr=document.createElement("tr");
+	table.appendChild(tr);
+	tr.setAttribute("width",w*0.98);
+	tr.setAttribute("height",200);
+	for (k = 0; k < 5; k++) { 
+		var td=document.createElement("td");
+		tr.appendChild(td);
+		td.setAttribute("width",w*0.196);
+		td.style.backgroundColor={{data|tojson}}[i][k];
+		console.log({{data|tojson}}[i][k]);
+		var text=document.createElement("p");
+		td.appendChild(text);
+		text.outerHTML="<p onmousemove='transparent(this)' onmouseout='normal(this)'>"+{{data|tojson}}[i][k]+"</p>";
+		}
+	}
+</script>
+</body>
+</html>

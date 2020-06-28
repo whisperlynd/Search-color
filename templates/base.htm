@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name=”viewport” content="width=device-width, initial-scale=1" />
+    <title>Title</title>
+	
+	<style>
+	*{margin:0; padding:0;}
+	*{box-sizing:border-box;}
+</style>
+
+</head>
+<body>
+	<!--扩展了flask库里的base.html，这个模板需要联网才能使用，没网就特丑-->
+	<div>
+	{% extends "bootstrap/base.html"%}
+	{%block title %}Flasky{% endblock %}
+	<!--导航栏-->
+	{%block navbar %}
+	{%endblock%}
+	
+	<!--页面内容,可以扩展成登录页面-->
+	{%block content%}
+		<div class="searchbar">
+        <form action="/search">
+            <input type="text" placeholder="" name="wanted" value="" default="">
+			<button type="submit"></button>
+        </form>
+		</div>
+	{% endblock %}
+	</div>
+	
+	{% block scripts %}
+	{{super()}}
+	{{moment.include_moment()}}
+	<script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+	{% endblock %}
+
+</body>
+</html>

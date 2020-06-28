@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{rs[0][2]}}</title>
+</head>
+<style>
+     pre{
+white-space: pre-wrap;       
+white-space: -moz-pre-wrap;  
+white-space: -pre-wrap;      
+white-space: -o-pre-wrap;    
+word-wrap: break-word;       
+}
+
+    </style>
+
+<body>
+	
+	{%extends "base.html" %}
+	{%block title%}{{rs[0][2]}}{% endblock %}
+	{% block page_content %}
+	<div class="page-header">
+		<h1>{{rs[0][2]}}</h1>
+		{% for r in rs %}
+		<a href="{{r[1]}}"  target="_blank">数据来源：{{ r[2]}}</a><br>
+		{%   endfor
+		%}
+	</div>
+	
+	<div class="page-content">
+			<pre>{{rs[0][5]}}</pre>
+	</div>
+	{% endblock %}
+
+</body>
+</html>
